@@ -36,7 +36,7 @@ struct SideMenuView: View {
                 Rectangle().fill(.white).frame(width: 270).shadow(color: .purple.opacity(0.1), radius: 5, x:0, y: 3)
                 
                 VStack(alignment: .leading, spacing: 0) {
-                    Text("Kawaiither").padding(.bottom, 30)
+                    Text("Arrête de pleuvoir").padding(.bottom, 30)
                     
                     ForEach(SideMenuType.allCases, id: \.self) { row in
                         RowView(isSelected: selectedTab == row.rawValue, icon: row.icon, title: row.title) {

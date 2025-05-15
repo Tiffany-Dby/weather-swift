@@ -37,7 +37,7 @@ struct HomeView: View {
                         Button {
                             hasSideMenu.toggle()
                         } label: {
-                            Image(systemName: "chevron.right.2").resizable().frame(width: 30, height: 30)
+                            Image(systemName: "chevron.right.2").resizable().scaledToFit().frame(width: 25)
                         }
                         
                         Spacer()
