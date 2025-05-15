@@ -13,6 +13,7 @@ struct MainTabView: View {
     
     var body: some View {
         ZStack {
+            
             TabView(selection: $selectedTab) {
                 HomeView(hasSideMenu: $hasSideMenu).tag(0)
             }
