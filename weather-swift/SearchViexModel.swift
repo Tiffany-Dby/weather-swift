@@ -8,20 +8,15 @@ import Foundation
 import SwiftUI
 
 @MainActor
-class SearchViexModel: ObservableObject {
-    @Published var searchText: String = ""
-    @Published var cityResults: [City] = []
-    @Published var insee: String = ""
-    @Published var forecasts: [Forecast] = []
+@Observable class SearchViexModel {
+    var searchText: String = ""
+    var cityResults: [City] = []
+    var forecasts: ForecastWeatherResponse?
+    var insee: String = ""
 
     public func fetchWeatherWithCityName(insee: String) {
         Task {
-            if let fetchedForecasts = await API().getWeatherWithCityName(insee: insee) {
-                self.forecasts = fetchedForecasts
-            } else {
-                print("Aucune prévision disponible.")
-                self.forecasts = []
-            }
+           forecasts = await API().getWeatherWithCityName(insee : insee)
         }
     }
 

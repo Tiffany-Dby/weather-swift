@@ -5,7 +5,7 @@ struct API {
     
     var Key = "ffb960378f18c78982b9f5f3feead2bed9e564a1b8d46d731ac21d549edbb83a"
     
-    public func getWeatherWithCityName(insee: String) async -> [Forecast]? {
+    public func getWeatherWithCityName(insee: String) async -> ForecastWeatherResponse? {
         let urlString = "https://api.meteo-concept.com/api/forecast/daily?token=\(Key)&insee=\(insee)"
 
         guard let url = URL(string: urlString) else {
@@ -17,7 +17,7 @@ struct API {
             let (data, _) = try await URLSession.shared.data(from: url)
             let decoded = try JSONDecoder().decode(ForecastWeatherResponse.self, from: data)
 
-            return decoded.forecast
+            return decoded
         } catch {
             print("Erreur de décodage météo : \(error)")
             return nil

@@ -29,50 +29,33 @@ struct HomeView: View {
 //        }
 //    }
     @Binding var hasSideMenu: Bool
-    @StateObject var searchViewModel = SearchViexModel()
-
-        var body: some View {
+    @State var searchViewModel = SearchViexModel()
+    
+    var body: some View {
+        
             ZStack {
+                LinearGradient(colors: [.pink.opacity(0.8), .pink.opacity(0.05)], startPoint: .top, endPoint: .bottom).ignoresSafeArea(.all)
+                
                 VStack {
                     HStack {
                         Button {
                             hasSideMenu.toggle()
                         } label: {
-                            Image(systemName: "chevron.right.2")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 25)
-                        }
+                            Image(systemName: "chevron.right.2").resizable().scaledToFit().frame(width: 25).foregroundColor(.black)
+                        }.padding()
                         
                         Spacer()
                     }
                     
                     Spacer()
                 }
-
-                VStack(spacing: 24) {
-                    if let todayForecast = searchViewModel.forecasts.first {
-                        DailyView(
-                            country: "France",
-                            city: "Bordeaux",
-                            temperature: todayForecast.tmax,
-                            weather: Weathers.from(weatherCode: todayForecast.weather)
-                        )
-                    } else {
-                        DailyView(
-                            country: "France",
-                            city: "Bordeaux",
-                            temperature: 0,
-                            weather: .clear
-                        )
+                
+                VStack {
+                    if let safeForecast = searchViewModel.forecasts {
+                        DailyView(forecast: safeForecast)
                     }
-
-                    WeeklyView(forecasts: searchViewModel.forecasts)
                 }
-            }
-            .padding(.horizontal, 24)
-            .task {
+            }.task {
                 searchViewModel.fetchWeatherWithCityName(insee: "33063")
             }
-        }
     }
