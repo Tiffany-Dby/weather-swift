@@ -28,4 +28,3 @@ struct Forecast: Decodable, Hashable {
     let probawind100: Int
     let gustx: Int
 }
-

@@ -34,5 +34,5 @@ struct DailyView: View {
 // 33063
 
 #Preview {
-   // DailyView(weather: Weathers.clear)
+    DailyView(weather: Weathers.currentWeather(code: 6))
 }
