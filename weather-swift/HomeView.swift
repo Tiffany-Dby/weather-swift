@@ -47,7 +47,7 @@ struct HomeView: View {
                 }
                 
                 VStack {
-                    (DailyView())
+                    (DailyView(weather: Weathers.clear))
                 }
             }.padding(.horizontal, 24)
     }

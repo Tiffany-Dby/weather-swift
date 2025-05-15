@@ -11,7 +11,7 @@ struct DailyView: View {
     var country: String = "France"
     var city: String = "Bordeaux"
     var temperature: Int = 20
-    var weather: String = "Pluie"
+    let weather: Weathers
     
     var body: some View {
         VStack {
@@ -20,9 +20,10 @@ struct DailyView: View {
             
             Text(city).font(.largeTitle).padding(.horizontal, 12).padding(.vertical, 6).background(RoundedRectangle(cornerRadius: 10).stroke(.black, lineWidth: 2))
             
-            Image(systemName: "cloud.sun.rain.fill").resizable().scaledToFit().frame(width: 200).padding(25)
+            weather.image.resizable().scaledToFit().frame(width: 200, height: 200)
+            
             Text("\(temperature)°C").font(.largeTitle)
-            Text(weather).font(.largeTitle)
+            Text(weather.rawValue).font(.largeTitle)
             
             Spacer()
         }
@@ -30,5 +31,5 @@ struct DailyView: View {
 }
 
 #Preview {
-    DailyView()
+    DailyView(weather: Weathers.clear)
 }

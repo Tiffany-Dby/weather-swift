@@ -6,11 +6,31 @@
 //
 
 import Foundation
+import SwiftUI
 
-enum Weathers: String, Decodable {
+enum Weathers: String, Decodable, CaseIterable {
     case cloudy = "Cloudy"
-    case rainy = "Rainy"
-    case snowy = "Snowy"
     case clear = "Clear"
-    case sunny = "Sunny"
+    case rainy = "Rainy"
+    case partialClear = "Partial Clear"
+    case snowy = "Snowy"
+    
+    private var isDaytime: Bool {
+        let hour = Calendar.current.component(.hour, from: Date())
+        return (6..<18).contains(hour)
+    }
+    
+    var imageName: String {
+        switch self {
+        case .cloudy: return isDaytime ? "cloudy-sun": "cloudy-moon"
+        case .clear: return isDaytime ? "clear-sun"  : "clear-moon"
+        case .rainy: return "rainy"
+        case .partialClear: return isDaytime ? "partial-clear-sun" : "partial-clear-moon"
+        case .snowy: return "snow"
+        }
+    }
+    
+    var image: Image {
+        Image(imageName)
+    }
 }
