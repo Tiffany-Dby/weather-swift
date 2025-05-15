@@ -4,38 +4,36 @@
 //
 //  Created by SDV Bordeaux on 15/05/2025.
 //
-
 import Foundation
 import SwiftUI
 
 @MainActor
-@Observable class SearchViexModel {
-    var searchText: String = ""
-    var cityResults: [City] = []
-    var insee: String = ""
+class SearchViexModel: ObservableObject {
+    @Published var searchText: String = ""
+    @Published var cityResults: [City] = []
+    @Published var insee: String = ""
+    @Published var forecasts: [Forecast] = []
 
     public func fetchWeatherWithCityName(insee: String) {
         Task {
-            if let forecasts = await API().getWeatherWithCityName(insee : insee) {
-                for day in forecasts {
-                    print("Jour \(day.day): Tmin \(day.tmin)°C, Tmax \(day.tmax)°C")
-                }
+            if let fetchedForecasts = await API().getWeatherWithCityName(insee: insee) {
+                self.forecasts = fetchedForecasts
             } else {
                 print("Aucune prévision disponible.")
+                self.forecasts = []
             }
         }
     }
 
     public func fetchCityInsee(communeName: String) {
-        Task{
-            insee = await API().getCityInsee(communeName: searchText) ?? ""
+        Task {
+            insee = await API().getCityInsee(communeName: communeName) ?? ""
         }
     }
     
-     func fetchSearchCity() {
-        Task{
+    func fetchSearchCity() {
+        Task {
             cityResults = await API().getSearchCity(communeName: searchText) ?? []
         }
     }
-    
 }

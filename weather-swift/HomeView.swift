@@ -29,15 +29,19 @@ struct HomeView: View {
 //        }
 //    }
     @Binding var hasSideMenu: Bool
-    
-    var body: some View {
+    @StateObject var searchViewModel = SearchViexModel()
+
+        var body: some View {
             ZStack {
                 VStack {
                     HStack {
                         Button {
                             hasSideMenu.toggle()
                         } label: {
-                            Image(systemName: "chevron.right.2").resizable().scaledToFit().frame(width: 25)
+                            Image(systemName: "chevron.right.2")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 25)
                         }
                         
                         Spacer()
@@ -45,10 +49,30 @@ struct HomeView: View {
                     
                     Spacer()
                 }
-                
-                VStack {
-                    (DailyView(weather: Weathers.clear))
+
+                VStack(spacing: 24) {
+                    if let todayForecast = searchViewModel.forecasts.first {
+                        DailyView(
+                            country: "France",
+                            city: "Bordeaux",
+                            temperature: todayForecast.tmax,
+                            weather: Weathers.from(weatherCode: todayForecast.weather)
+                        )
+                    } else {
+                        DailyView(
+                            country: "France",
+                            city: "Bordeaux",
+                            temperature: 0,
+                            weather: .clear
+                        )
+                    }
+
+                    WeeklyView(forecasts: searchViewModel.forecasts)
                 }
-            }.padding(.horizontal, 24)
+            }
+            .padding(.horizontal, 24)
+            .task {
+                searchViewModel.fetchWeatherWithCityName(insee: "33063")
+            }
+        }
     }
-}

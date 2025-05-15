@@ -22,15 +22,37 @@ enum Weathers: String, Decodable, CaseIterable {
     
     var imageName: String {
         switch self {
-        case .cloudy: return isDaytime ? "cloudy-sun": "cloudy-moon"
-        case .clear: return isDaytime ? "clear-sun"  : "clear-moon"
-        case .rainy: return "rainy"
-        case .partialClear: return isDaytime ? "partial-clear-sun" : "partial-clear-moon"
-        case .snowy: return "snow"
+        case .cloudy:
+            return isDaytime ? "cloudy-sun" : "cloudy-moon"
+        case .clear:
+            return isDaytime ? "clear-sun" : "clear-moon"
+        case .rainy:
+            return "rainy"
+        case .partialClear:
+            return isDaytime ? "partial-clear-sun" : "partial-clear-moon"
+        case .snowy:
+            return "snow"
         }
     }
     
     var image: Image {
         Image(imageName)
+    }
+    
+    static func from(weatherCode: Int) -> Weathers {
+        switch weatherCode {
+        case 0...2:
+            return .clear
+        case 3...5:
+            return .partialClear
+        case 6...7:
+            return .cloudy
+        case 10...14:
+            return .rainy
+        case 20...22:
+            return .snowy
+        default:
+            return .cloudy
+        }
     }
 }
