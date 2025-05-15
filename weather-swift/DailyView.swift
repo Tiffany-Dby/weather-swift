@@ -23,7 +23,7 @@ struct DailyView: View {
             weather.image.resizable().scaledToFit().frame(width: 200, height: 200)
             
             Text("\(temperature)°C").font(.largeTitle)
-            Text(weather.rawValue).font(.largeTitle)
+            Text(weather.imageName).font(.largeTitle)
             
             Spacer()
         }
@@ -31,5 +31,5 @@ struct DailyView: View {
 }
 
 #Preview {
-    DailyView(weather: Weathers.clear)
+    DailyView(weather: Weathers.currentWeather(code: 6))
 }
