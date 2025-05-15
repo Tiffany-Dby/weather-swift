@@ -4,7 +4,7 @@ import SwiftUI
 struct API {
     
     var Key = "ffb960378f18c78982b9f5f3feead2bed9e564a1b8d46d731ac21d549edbb83a"
-
+    
     public func getWeatherWithCityName(cityName: String, previsionTime: Int) {
         getCityInsee(communeName: cityName) { insee in
             if let insee = insee {
@@ -14,7 +14,7 @@ struct API {
                     print("URL invalide")
                     return
                 }
-
+                
                 URLSession.shared.dataTask(with: url) { data, response, error in
                     if let error = error {
                         print("Erreur de requête météo : \(error.localizedDescription)")
@@ -39,7 +39,7 @@ struct API {
             }
         }
     }
-
+    
     public func getCityInsee(communeName: String, completion: @escaping (String?) -> Void) {
         let urlString = "https://api.meteo-concept.com/api/location/cities?token=\(Key)&search=\(communeName)"
         
@@ -48,7 +48,7 @@ struct API {
             completion(nil)
             return
         }
-
+        
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("Erreur de requête de recherche de ville : \(error.localizedDescription)")
@@ -77,55 +77,29 @@ struct API {
             }
         }.resume()
     }
-    
-    public func getSearchCity(communeName: String, completion: @escaping ([(String, Int,String)]?) -> Void) {
+
+public func getSearchCity (communeName: String) async -> [City]? {
         let urlString = "https://api.meteo-concept.com/api/location/cities?token=\(Key)&search=\(communeName)"
         
         guard let url = URL(string: urlString) else {
             print("URL invalide")
-            completion(nil)
-            return
+            return nil
         }
-
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Erreur de requête de recherche de ville : \(error.localizedDescription)")
-                completion(nil)
-                return
-            }
+        
+        do {
+            let (result ,_) = try await URLSession.shared.data(from: url)
+            let decodedResponse = try JSONDecoder().decode(CitySearchResponse.self, from: result)
             
-            guard let data = data else {
-                print("Aucune donnée reçue")
-                completion(nil)
-                return
-            }
+            return decodedResponse.cities
             
-            do {
-                let decodedResponse = try JSONDecoder().decode(CitySearchResponse.self, from: data)
-                
-                let listCity = decodedResponse.cities.map { (city) -> (String,Int, String) in
-                    return (city.name, city.cp, city.insee)
-                }
-                completion(listCity)
-                
-            } catch {
-                print("Erreur de décodage JSON : \(error)")
-                completion(nil)
-            }
-        }.resume()
+        } catch {
+            print("Erreur de décodage JSON : \(error)")
+            return nil
+        }
     }
-
+    
 }
 
-struct CitySearchResponse: Codable {
+struct CitySearchResponse: Decodable {
     let cities: [City]
-}
-
-struct City: Codable {
-    let insee: String
-    let name: String
-    let cp: Int
-    let latitude: Double
-    let longitude: Double
-    let altitude: Int
 }

@@ -8,8 +8,8 @@ import Foundation
 import SwiftUI
 
 struct SearchView: View {
-    @State private var searchText: String = ""
-    @State private var cityResults: [(String, Int, String)] = []
+    @Bindable var searchViewModel = SearchViexModel()
+   
     
     var body: some View {
         NavigationView {
@@ -19,29 +19,27 @@ struct SearchView: View {
                 
                 VStack {
                     HStack {
-                        TextField("Rechercher une ville...", text: $searchText)
+                        TextField("Rechercher une ville...", text: $searchViewModel.searchText)
                             .padding(10)
                             .background(Color.white.opacity(0.2))
                             .cornerRadius(10)
                             .foregroundColor(.white)
                             .padding(.horizontal)
                             .onSubmit {
-                                API().getSearchCity(communeName: searchText) { results in
-                                    if let results = results {
-                                        self.cityResults = results
-                                    }
-                                }
+                                searchViewModel.fetchSearchCity()
                             }
                     }
-                    .padding(.bottom, 50)
-                    
-                    List(cityResults, id: \.0) { city in
-                        Text("\(city.0) - CP: \(city.1)")
+                }
+                .padding(.bottom, 50)
+                if !searchViewModel.cityResults.isEmpty {
+                    List(searchViewModel.cityResults) { city in
+                        Text("\(city.name) - CP: \(city.cp) - Insee : \(city.insee)")
                     }
                 }
+               
             }
-            .navigationBarHidden(true)
         }
+        .navigationBarHidden(true)
     }
 }
 
