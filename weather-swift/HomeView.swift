@@ -52,7 +52,7 @@ struct HomeView: View {
                 
                 VStack {
                     if let safeForecast = searchViewModel.forecasts {
-                        DailyView( forcast: safeForecast)
+                        DailyView(forecast: safeForecast)
                     }
                 }
             }.task {
