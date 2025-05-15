@@ -18,7 +18,6 @@ struct SearchView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack {
-                    HStack {
                         TextField("Rechercher une ville...", text: $searchViewModel.searchText)
                             .padding(10)
                             .background(Color.white.opacity(0.2))
@@ -28,12 +27,11 @@ struct SearchView: View {
                             .onSubmit {
                                 searchViewModel.fetchSearchCity()
                             }
-                    }
-                }
-                .padding(.bottom, 50)
-                if !searchViewModel.cityResults.isEmpty {
-                    List(searchViewModel.cityResults) { city in
-                        Text("\(city.name) - CP: \(city.cp) - Insee : \(city.insee)")
+                            .padding(.bottom, 50)
+                    if !searchViewModel.cityResults.isEmpty {
+                        List(searchViewModel.cityResults) { city in
+                            Text("\(city.name) - CP: \(city.cp) - Insee : \(city.insee)")
+                        }
                     }
                 }
                
