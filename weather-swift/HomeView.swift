@@ -29,16 +29,20 @@ struct HomeView: View {
 //        }
 //    }
     @Binding var hasSideMenu: Bool
+    @State var searchViewModel = SearchViexModel()
     
     var body: some View {
+        
             ZStack {
+                LinearGradient(colors: [.pink.opacity(0.8), .pink.opacity(0.05)], startPoint: .top, endPoint: .bottom).ignoresSafeArea(.all)
+                
                 VStack {
                     HStack {
                         Button {
                             hasSideMenu.toggle()
                         } label: {
-                            Image(systemName: "chevron.right.2").resizable().scaledToFit().frame(width: 25)
-                        }
+                            Image(systemName: "chevron.right.2").resizable().scaledToFit().frame(width: 25).foregroundColor(.black)
+                        }.padding()
                         
                         Spacer()
                     }
@@ -47,8 +51,12 @@ struct HomeView: View {
                 }
                 
                 VStack {
-                    (DailyView(weather: Weathers.clear))
+                    if let safeForecast = searchViewModel.forecasts {
+                        DailyView( forcast: safeForecast)
+                    }
                 }
-            }.padding(.horizontal, 24)
+            }.task {
+                searchViewModel.fetchWeatherWithCityName(insee: "33063")
+            }
     }
 }

@@ -13,9 +13,11 @@ struct MainTabView: View {
     
     var body: some View {
         ZStack {
-            
             TabView(selection: $selectedTab) {
                 HomeView(hasSideMenu: $hasSideMenu).tag(0)
+                HomeView(hasSideMenu: $hasSideMenu).tag(1)
+                HomeView(hasSideMenu: $hasSideMenu).tag(2)
+                HomeView(hasSideMenu: $hasSideMenu).tag(3)
             }
             
             SideMenu(isOpen: $hasSideMenu, content: AnyView(SideMenuView(selectedTab: $selectedTab, hasSideMenu: $hasSideMenu)))

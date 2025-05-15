@@ -12,17 +12,12 @@ import SwiftUI
 @Observable class SearchViexModel {
     var searchText: String = ""
     var cityResults: [City] = []
+    var forecasts: ForecastWeatherResponse?
     var insee: String = ""
 
     public func fetchWeatherWithCityName(insee: String) {
         Task {
-            if let forecasts = await API().getWeatherWithCityName(insee : insee) {
-                for day in forecasts {
-                    print("Jour \(day.day): Tmin \(day.tmin)°C, Tmax \(day.tmax)°C")
-                }
-            } else {
-                print("Aucune prévision disponible.")
-            }
+           forecasts = await API().getWeatherWithCityName(insee : insee)
         }
     }
 

@@ -17,7 +17,7 @@ struct SideMenuView: View {
         } label: {
             VStack(alignment: .leading) {
                 HStack(spacing: 20) {
-                    Rectangle().fill(isSelected ? .purple : .white).frame(width: 5)
+                    Rectangle().fill(isSelected ? .pink.opacity(0.8) : .white).frame(width: 5)
                     
                     ZStack {
                         Image(systemName: icon).resizable().renderingMode(.template).foregroundColor(isSelected ? .black : .gray).frame(width: 26, height: 26)
@@ -27,7 +27,7 @@ struct SideMenuView: View {
                     Spacer()
                 }
             }
-        }.frame(height: 50).background(LinearGradient(colors: [isSelected ? .purple.opacity(0.5) : .white, .white], startPoint: .leading, endPoint: .trailing))
+        }.frame(height: 50).background(LinearGradient(colors: [isSelected ? .pink.opacity(0.5) : .white, .white], startPoint: .leading, endPoint: .trailing))
     }
     
     var body: some View {

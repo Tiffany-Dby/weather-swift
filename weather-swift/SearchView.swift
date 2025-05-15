@@ -15,8 +15,6 @@ struct SearchView: View {
     var body: some View {
         NavigationView {
             ZStack {
-//                LinearGradient(gradient: Gradient(colors: [Color.blue, Color.red]), startPoint: .top, endPoint: .bottom)
-//                    .edgesIgnoringSafeArea(.all)
                 
                 VStack {
                         TextField("Rechercher une ville...", text: $searchViewModel.searchText)

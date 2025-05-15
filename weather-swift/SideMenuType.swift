@@ -11,6 +11,7 @@ enum SideMenuType: Int, CaseIterable {
     case home = 0
     case favorites
     case search
+    case random
     
     var title: String {
         switch self {
@@ -20,6 +21,8 @@ enum SideMenuType: Int, CaseIterable {
             return "Favoris"
         case .search:
             return "Rechercher"
+        case .random:
+            return "Aléatoire"
         }
     }
     
@@ -31,6 +34,8 @@ enum SideMenuType: Int, CaseIterable {
             return "star"
         case .search:
             return "magnifyingglass"
+        case .random:
+            return "shuffle"
         }
     }
 }
