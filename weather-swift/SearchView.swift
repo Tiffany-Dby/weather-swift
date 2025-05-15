@@ -27,6 +27,7 @@ struct SearchView: View {
                             .padding(.horizontal)
                             .onSubmit {
                                 searchViewModel.fetchSearchCity()
+                                searchViewModel.fetchWeatherWithCityName(insee: "17033")
                             }
                             .padding(.bottom, 50)
                     if !searchViewModel.cityResults.isEmpty {
