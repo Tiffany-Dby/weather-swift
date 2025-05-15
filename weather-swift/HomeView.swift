@@ -53,9 +53,11 @@ struct HomeView: View {
                 VStack {
                     if let safeForecast = searchViewModel.forecasts {
                         DailyView(forecast: safeForecast)
+                        WeeklyView(forecasts: safeForecast)
                     }
                 }
             }.task {
                 searchViewModel.fetchWeatherWithCityName(insee: "33063")
             }
     }
+}

@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct SearchView: View {
-    @StateObject var searchViewModel = SearchViexModel()
+    @State var searchViewModel = SearchViexModel()
    
     
     var body: some View {

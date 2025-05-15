@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct WeeklyView: View {
-    var forecasts: [Forecast]
+    var forecasts: ForecastWeatherResponse
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 16) {
-                ForEach(forecasts.prefix(7), id: \.self) { forecast in
+                ForEach(forecasts.forecast.prefix(7), id: \.self) { forecast in
                     ForecastDayView(forecast: forecast)
                 }
             }
@@ -26,8 +26,4 @@ struct WeeklyView: View {
                 .cornerRadius(20)
         )
     }
-}
-
-#Preview {
-    WeeklyView(forecasts: [])
 }

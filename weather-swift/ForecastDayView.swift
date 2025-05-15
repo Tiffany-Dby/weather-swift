@@ -17,10 +17,10 @@ struct ForecastDayView: View {
                 .foregroundColor(.red)
                 .frame(width: 60, height: 60)
             
-            weatherImage(for: forecast.weather)
+            Image(Weathers.currentWeather(code: forecast.weather).imageName)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 40, height: 40)
+                .frame(width: 60, height: 60)
             
             Text("\(forecast.tmax)°C")
                 .font(.headline)
@@ -42,11 +42,5 @@ struct ForecastDayView: View {
         } else {
             return "-"
         }
-    }
-
-    
-    private func weatherImage(for weatherCode: Int) -> Image {
-        let weather = Weathers.from(weatherCode: weatherCode)
-        return weather.image
     }
 }
