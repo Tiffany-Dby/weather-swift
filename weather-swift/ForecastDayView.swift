@@ -10,9 +10,8 @@ import SwiftUI
 struct ForecastDayView: View {
     let forecast: Forecast
     
-    private var dayString: String {
-        shortDate(from: forecast.datetime)
-    }
+    @State var dayString = ""
+    
     
     var body: some View {
         VStack(spacing: 8) {
@@ -30,6 +29,8 @@ struct ForecastDayView: View {
                 .font(.headline)
                 .foregroundColor(.white)
         }
-        .frame(width: 60).padding(.vertical)
+        .frame(width: 60).padding(.vertical).onAppear() {
+            self.dayString = FormatDate.shortDate(from: forecast.datetime)
+        }
     }
 }
