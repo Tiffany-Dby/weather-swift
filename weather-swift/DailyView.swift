@@ -13,14 +13,14 @@ struct DailyView: View {
 
     var body: some View {
         VStack {
-            Text(country).font(.headline)
+            Text(country).font(.headline).foregroundColor(.white).bold()
             (TimeView())
             
-            Text(forecast.city.name).font(.largeTitle).padding(.horizontal, 12).padding(.vertical, 6).background(RoundedRectangle(cornerRadius: 10).stroke(.black, lineWidth: 2))
+            Text(forecast.city.name).font(.largeTitle).padding(.horizontal, 12).padding(.vertical, 6).background(RoundedRectangle(cornerRadius: 10).stroke(.white, lineWidth: 3)).bold().foregroundColor(.white)
             
             Image(Weathers.currentWeather(code: forecast.forecast.first!.weather).imageName).resizable().scaledToFit().frame(width: 200, height: 200)
             
-            Text("\(forecast.forecast.first!.tmax)°C").font(.largeTitle)
+            Text("\(forecast.forecast.first!.tmax)°C").font(.largeTitle).bold().foregroundColor(.white)
             //Text(weather.rawValue).font(.largeTitle)
             
             Spacer()

@@ -49,10 +49,10 @@ enum Weathers: Int, Decodable, CaseIterable {
             return "snow"
             
         case .rain:
-            return "snow"
+            return "Rain"
             
         case .thunderstorm:
-            return "thunderstorm"
+            return "Storm"
             
         case .other:
             return ""

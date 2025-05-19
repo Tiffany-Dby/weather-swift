@@ -34,14 +34,14 @@ struct HomeView: View {
     var body: some View {
         
             ZStack {
-                LinearGradient(colors: [.pink.opacity(0.8), .pink.opacity(0.05)], startPoint: .top, endPoint: .bottom).ignoresSafeArea(.all)
+                LinearGradient(colors: [.pink.opacity(0.8), .pink.opacity(0.1)], startPoint: .top, endPoint: .bottom).ignoresSafeArea(.all)
                 
                 VStack {
                     HStack {
                         Button {
                             hasSideMenu.toggle()
                         } label: {
-                            Image(systemName: "chevron.right.2").resizable().scaledToFit().frame(width: 25).foregroundColor(.black)
+                            Image(systemName: "line.3.horizontal").resizable().scaledToFit().frame(width: 25).foregroundColor(.white)
                         }.padding()
                         
                         Spacer()

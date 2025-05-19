@@ -10,7 +10,7 @@ import SwiftUI
 struct TimeView: View {
     var body: some View {
         TimelineView(.periodic(from: .now, by: 1)) {
-            Text($0.date, style: .time).font(.largeTitle)
+            Text($0.date, style: .time).font(.largeTitle).foregroundColor(.white).bold()
         }
     }
 }

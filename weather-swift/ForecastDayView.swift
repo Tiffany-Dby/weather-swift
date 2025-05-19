@@ -10,12 +10,16 @@ import SwiftUI
 struct ForecastDayView: View {
     let forecast: Forecast
     
+    private var dayString: String {
+        shortDate(from: forecast.datetime)
+    }
+    
     var body: some View {
         VStack(spacing: 8) {
-            Text(formattedDay(from: forecast.datetime))
-                .font(.caption)
-                .foregroundColor(.red)
-                .frame(width: 60, height: 60)
+            Text(dayString)
+                .font(.headline)
+                .foregroundColor(.white)
+                .frame(width: 60).padding(.bottom, 10)
             
             Image(Weathers.currentWeather(code: forecast.weather).imageName)
                 .resizable()
@@ -26,21 +30,6 @@ struct ForecastDayView: View {
                 .font(.headline)
                 .foregroundColor(.white)
         }
-        .frame(width: 60)
-    }
-    
-    private func formattedDay(from datetime: String) -> String {
-        let inputFormatter = DateFormatter()
-        inputFormatter.locale = Locale(identifier: "fr_FR")
-        inputFormatter.dateFormat = "yyyy-MM-dd"
-        
-        if let date = inputFormatter.date(from: datetime) {
-            let outputFormatter = DateFormatter()
-            outputFormatter.locale = Locale(identifier: "fr_FR")
-            outputFormatter.dateFormat = "E"
-            return outputFormatter.string(from: date).capitalized
-        } else {
-            return "-"
-        }
+        .frame(width: 60).padding(.vertical)
     }
 }

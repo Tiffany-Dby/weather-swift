@@ -20,7 +20,7 @@ struct WeeklyView: View {
             .padding()
         }
         .background(
-            LinearGradient(colors: [Color.blue.opacity(0.6), Color.blue.opacity(0.2)],
+            LinearGradient(colors: [Color.pink.opacity(0.5), Color.pink.opacity(0.2)],
                            startPoint: .top,
                            endPoint: .bottom)
                 .cornerRadius(20)

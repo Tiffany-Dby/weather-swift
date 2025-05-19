@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct MainTabView: View {
+    init() {
+        UITabBar.appearance().isHidden = true
+    }
+    
     @State var hasSideMenu = false
     @State var selectedTab: Int = 0
     
@@ -16,7 +20,7 @@ struct MainTabView: View {
             TabView(selection: $selectedTab) {
                 HomeView(hasSideMenu: $hasSideMenu).tag(0)
                 HomeView(hasSideMenu: $hasSideMenu).tag(1)
-                HomeView(hasSideMenu: $hasSideMenu).tag(2)
+                SearchView(hasSideMenu: $hasSideMenu).tag(2)
                 HomeView(hasSideMenu: $hasSideMenu).tag(3)
             }
             
