@@ -7,7 +7,7 @@ struct API {
     
     public func getWeatherWithCityName(insee: String) async -> ForecastWeatherResponse? {
         let urlString = "https://api.meteo-concept.com/api/forecast/daily?token=\(Key)&insee=\(insee)"
-
+            
         guard let url = URL(string: urlString) else {
             print("URL invalide")
             return nil
