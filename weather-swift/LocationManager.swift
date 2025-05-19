@@ -6,7 +6,7 @@
 //
 import Foundation
 import CoreLocation
-
+@MainActor
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let manager = CLLocationManager()
     private let geocoder = CLGeocoder()
@@ -37,10 +37,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         do {
             let placemarks = try await geocoder.reverseGeocodeLocation(location)
             if let placemark = placemarks.first {
-                DispatchQueue.main.async {
                     self.cityName = placemark.locality ?? "Ville inconnue"
-                }
-                print(placemark.locality)
                 await fetchCityInsee(communeName: self.cityName)
             }
         } catch {
@@ -49,6 +46,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
 
     private func fetchCityInsee(communeName: String) async {
+        print(communeName)
         if let insee = await API().getCityInsee(communeName: communeName) {
             if let inseeInt = Int(insee) {
                 DispatchQueue.main.async {

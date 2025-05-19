@@ -45,18 +45,19 @@ struct HomeView: View {
             }
         }
         .onChange(of: locationManager.cityINSEE) { oldValue, newValue in
-            guard let newINSEE = newValue else { return }
-            
-            guard lastFetchedINSEE != newINSEE else {
-                print("INSEE déjà utilisé : \(newINSEE)")
-                return
-            }
+                    guard let newINSEE = newValue else { return }
+                    
+                    // On vérifie si c'est un nouveau code INSEE
+                    guard lastFetchedINSEE != newINSEE else {
+                        print("INSEE déjà utilisé : \(newINSEE)")
+                        return
+                    }
 
-            print("INSEE détecté et utilisé : \(newINSEE)")
-            searchViewModel.fetchWeatherWithCityName(insee: String(newINSEE))
-            lastFetchedINSEE = newINSEE
-            hasFetched = true
-        }
+                    print("INSEE détecté et utilisé : \(newINSEE)")
+                    searchViewModel.fetchWeatherWithCityName(insee: String(newINSEE))
+                    lastFetchedINSEE = newINSEE 
+                    hasFetched = true
+                }
     }
 }
 
