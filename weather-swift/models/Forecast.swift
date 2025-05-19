@@ -28,3 +28,9 @@ struct Forecast: Decodable, Hashable {
     let probawind100: Int
     let gustx: Int
 }
+
+struct ForecastWeatherResponse: Decodable {
+    let city: City
+    let update: String
+    let forecast: [Forecast]
+}

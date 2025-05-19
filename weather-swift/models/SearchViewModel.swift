@@ -1,5 +1,5 @@
 //
-//  SearchViexModel.swift
+//  SearchViewModel.swift
 //  weather-swift
 //
 //  Created by SDV Bordeaux on 15/05/2025.
@@ -8,7 +8,7 @@ import Foundation
 import SwiftUI
 
 @MainActor
-@Observable class SearchViexModel {
+@Observable class SearchViewModel {
     var searchText: String = ""
     var cityResults: [City] = []
     var forecasts: ForecastWeatherResponse?
@@ -16,19 +16,19 @@ import SwiftUI
 
     public func fetchWeatherWithCityName(insee: String) {
         Task {
-           forecasts = await API().getWeatherWithCityName(insee : insee)
+           forecasts = await API.getWeatherWithCityName(insee : insee)
         }
     }
 
     public func fetchCityInsee(communeName: String) {
         Task {
-            insee = await API().getCityInsee(communeName: communeName) ?? ""
+            insee = await API.getCityInsee(communeName: communeName) ?? ""
         }
     }
     
     func fetchSearchCity() {
         Task {
-            cityResults = await API().getSearchCity(communeName: searchText) ?? []
+            cityResults = await API.getSearchCity(communeName: searchText) ?? []
         }
     }
 }

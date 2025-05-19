@@ -19,3 +19,7 @@ struct City: Decodable, Hashable,Identifiable {
         case insee, name, cp, latitude, longitude, altitude
     }
 }
+
+struct CitySearchResponse: Decodable {
+    let cities: [City]
+}

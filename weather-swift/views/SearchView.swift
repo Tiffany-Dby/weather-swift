@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SearchView: View {
     @Binding var hasSideMenu: Bool
-    @State var searchViewModel = SearchViexModel()
+    @State var searchViewModel = SearchViewModel()
    
     var body: some View {
         NavigationView {
@@ -40,7 +40,7 @@ struct SearchView: View {
                             .padding(.horizontal)
                             .onSubmit {
                                 searchViewModel.fetchSearchCity()
-                                searchViewModel.fetchWeatherWithCityName(insee: "17033")
+                                searchViewModel.fetchWeatherWithCityName(insee: "")
                             }.padding(.top, 40)
                     if !searchViewModel.cityResults.isEmpty {
                         

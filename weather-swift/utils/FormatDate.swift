@@ -1,5 +1,5 @@
 //
-//  ShortDate.swift
+//  FormatDate.swift
 //  weather-swift
 //
 //  Created by Tiffany Dbeissy on 15/05/2025.

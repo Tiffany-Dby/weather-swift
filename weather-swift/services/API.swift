@@ -3,9 +3,9 @@ import SwiftUI
 
 struct API {
     
-    var Key = "ffb960378f18c78982b9f5f3feead2bed9e564a1b8d46d731ac21d549edbb83a"
+    static var Key = "ffb960378f18c78982b9f5f3feead2bed9e564a1b8d46d731ac21d549edbb83a"
     
-    public func getWeatherWithCityName(insee: String) async -> ForecastWeatherResponse? {
+    static public func getWeatherWithCityName(insee: String) async -> ForecastWeatherResponse? {
         let urlString = "https://api.meteo-concept.com/api/forecast/daily?token=\(Key)&insee=\(insee)"
             
         guard let url = URL(string: urlString) else {
@@ -24,7 +24,7 @@ struct API {
         }
     }
     
-    public func getCityInsee(communeName: String) async -> String? {
+    static public func getCityInsee(communeName: String) async -> String? {
         let urlString = "https://api.meteo-concept.com/api/location/cities?token=\(Key)&search=\(communeName)"
         
         guard let url = URL(string: urlString) else {
@@ -48,7 +48,7 @@ struct API {
         }
     }
     
-    public func getSearchCity (communeName: String) async -> [City]? {
+    static public func getSearchCity (communeName: String) async -> [City]? {
         let urlString = "https://api.meteo-concept.com/api/location/cities?token=\(Key)&search=\(communeName)"
         
         guard let url = URL(string: urlString) else {
@@ -68,14 +68,4 @@ struct API {
         }
     }
     
-}
-
-struct CitySearchResponse: Decodable {
-    let cities: [City]
-}
-
-struct ForecastWeatherResponse: Decodable {
-    let city: City
-    let update: String
-    let forecast: [Forecast]
 }

@@ -12,7 +12,7 @@ struct FavoritesView: View {
     @Binding var hasSideMenu: Bool
     
     @Query var favorites: [Favorite]
-    @State var searchViewModel = SearchViexModel()
+    @State var searchViewModel = SearchViewModel()
     
     var body: some View {
         
