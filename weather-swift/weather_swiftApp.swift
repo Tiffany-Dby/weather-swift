@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct weather_swiftApp: App {
     var body: some Scene {
         WindowGroup {
             MainTabView()
-        }
+        }.modelContainer(for: Favorite.self)
     }
 }

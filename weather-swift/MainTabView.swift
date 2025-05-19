@@ -19,7 +19,7 @@ struct MainTabView: View {
         ZStack {
             TabView(selection: $selectedTab) {
                 HomeView(hasSideMenu: $hasSideMenu).tag(0)
-                HomeView(hasSideMenu: $hasSideMenu).tag(1)
+                FavoritesView(hasSideMenu: $hasSideMenu).tag(1)
                 SearchView(hasSideMenu: $hasSideMenu).tag(2)
                 HomeView(hasSideMenu: $hasSideMenu).tag(3)
             }
