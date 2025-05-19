@@ -21,7 +21,6 @@ struct MainTabView: View {
                 HomeView(hasSideMenu: $hasSideMenu).tag(0)
                 FavoritesView(hasSideMenu: $hasSideMenu).tag(1)
                 SearchView(hasSideMenu: $hasSideMenu).tag(2)
-                HomeView(hasSideMenu: $hasSideMenu).tag(3)
             }
             
             SideMenu(isOpen: $hasSideMenu, content: AnyView(SideMenuView(selectedTab: $selectedTab, hasSideMenu: $hasSideMenu)))
